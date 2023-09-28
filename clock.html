@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Custom Clock and Counter</title>
+</head>
+<body>
+    <div id="clock-container">
+        <span id="solar-cycle"></span> Solar Cycle<br>
+        <span id="rays"></span> Rays<br>
+        <span id="turns"></span> Turns<br>
+        <span id="ring-years"></span> Ring/Year<br>
+        <span id="days"></span> Days<br>
+        <span id="months"></span> Months<br>
+        <span id="hours"></span> Hours<br>
+        <span id="minutes"></span> Minutes<br>
+        <span id="seconds"></span> Seconds<br>
+    </div>
+    
+    <script>
+        // Initialize variables for each unit of time
+let solarCycle = 25;
+let rays = 0;
+let turns = 0;
+let ringYears = 0;
+let days = 0;
+let months = 0;
+let hours = 0;
+let minutes = 0;
+let seconds = 0;
+
+// Function to update and display the clock
+function updateClock() {
+    seconds++;
+    
+    // Check for every 90 seconds
+    if (seconds === 90) {
+        seconds = 0;
+        minutes++;
+        
+        // Check for every 90 minutes
+        if (minutes === 90) {
+            minutes = 0;
+            hours++;
+            
+            // Check for every 11 hours
+            if (hours === 11) {
+                hours = 0;
+                days++;
+                
+                // Check for every 45 days
+                if (days === 45) {
+                    days = 0;
+                    months++;
+                    
+                    // Check for every 8 months or 360 days
+                    if (months === 8 || days === 360) {
+                        months = 0;
+                        ringYears++;
+                        
+                        // Check for every 8 turns (45 rays x 8 turns)
+                        if (turns === 8) {
+                            turns = 0;
+                            ringYears++;
+                            
+                            // Check for every 360 Rays/Days (8 turns x 45 rays x 360 days)
+                            if (ringYears === 27000) {
+                                ringYears = 0;
+                                solarCycle++;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    // Check for every 45 rays
+    if (rays === 45) {
+        rays = 0;
+        turns++;
+        
+        // Check for every 216,000 months (8 turns x 45 rays x 45 rays)
+        if (turns === 216000) {
+            turns = 0;
+            ringYears++;
+            
+            // Check for every 360 Rays/Days (8 turns x 45 rays x 360 days)
+            if (ringYears === 27000) {
+                ringYears = 0;
+                solarCycle++;
+            }
+        }
+    }
+    
+    // Update the HTML elements
+    document.getElementById("solar-cycle").textContent = `Solar Cycle: ${solarCycle}`;
+    document.getElementById("rays").textContent = rays;
+    document.getElementById("turns").textContent = turns;
+    document.getElementById("ring-years").textContent = `Ring/Year: ${ringYears}`;
+    document.getElementById("days").textContent = days;
+    document.getElementById("months").textContent = months;
+    document.getElementById("hours").textContent = hours;
+    document.getElementById("minutes").textContent = minutes;
+    document.getElementById("seconds").textContent = seconds;
+}
+
+// Update the clock every second
+setInterval(updateClock, 1000);
+
+    </script>
+</body>
+</html>

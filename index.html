@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<div class="res">
+    <h3 class="name"></h3>
+    <h3 class="address1"></h3>
+    <h3 class="linkedin"></h3>
+    <h3 class="fiver"></h3>
+    <h3 class="pnumber"></h3>
+    <h3 class="emi"></h3>
+</div>
+    <div class="form">
+        <div class="form1">
+            <h2>Contact Info</h2>
+            <div class="formgroup">
+                <label for="name1">Name</label>
+                <input type="text" id="name1" placeholder="Enter Name" required>
+            </div>
+            <div class="formgroup">
+                <label for="address1">Address</label>
+                <input type="text" id="address1" placeholder="Enter Address" required>
+            </div>
+            <div class="btns">
+                <button class="next1">Next</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var next1 = document.querySelector('.next1');
+        var f1 = document.querySelector('.form1');
+        var f2Created = false; 
+        var f3Created = false; 
+
+        next1.addEventListener('click', function () {
+            // Validate form1 fields
+            var name1 = document.getElementById('name1').value;
+            var address1 = document.getElementById('address1').value;
+
+            if (name1 === "" || address1 === "") {
+                alert("Please fill in all fields in Form 1.");
+                return;
+            }
+
+            if (!f2Created) { // Only create form2 if it hasn't been created yet
+                // Define the HTML structure for form2
+                const html = `
+                    <div class="form2">
+                        <h2>Social Links</h2>
+                        <div class="formgroup">
+                            <label for="linkedin">Linkedin</label>
+                            <input type="text" id="linkedin" placeholder="Enter Name" required>
+                        </div>
+                        <div class="formgroup">
+                            <label for="fiver">Fiver</label> 
+                            <input type="text" id="fiver" placeholder="Enter Address" required>
+                        </div>
+                        <div class="btns">
+                            <button class="back1" onclick="back1();">Back</button>
+                            <button class="next2" onclick="next22();">Next</button>
+                        </div>
+                    </div>
+                `;
+                // Insert form2 HTML after the first form
+                f1.insertAdjacentHTML('afterend', html);
+                f2Created = true; // Set the flag to true
+            }
+            // Slide to form2
+            var f2 = document.querySelector('.form2');
+            f1.style.left = "-430px";
+            f2.style.left = "0px";
+        });
+
+        function back1() {
+            var f2 = document.querySelector('.form2');
+            f1.style.left = "0px";
+            f2.style.left = "430px";
+        }
+
+        function next22() {
+            // Validate form2 fields
+            var linkedin = document.getElementById('linkedin').value;
+            var fiver = document.getElementById('fiver').value;
+
+            if (linkedin === "" || fiver === "") {
+                alert("Please fill in all fields in Form 2.");
+                return;
+            }
+
+            if (!f3Created) { // Only create form3 if it hasn't been created yet
+                // Define the HTML structure for form3
+                const html3 = `
+                    <div class="form3">
+                        <h2>Contact Details</h2>
+                        <div class="formgroup">
+                            <label for="phoneNumber">Phone Number</label>
+                            <input type="text" id="phoneNumber" placeholder="Enter Phone Number" required>
+                        </div>
+                        <div class="formgroup">
+                            <label for="email">Email</label>
+                            <input type="text" id="email" placeholder="Enter Email" required>
+                        </div>
+                        <div class="btns">
+                            <button class="back2" onclick="back2();">Back</button>
+                            <button class="next3" onclick="next3();">Submit</button>
+                        </div>
+                    </div>
+                `;
+                var f2 = document.querySelector('.form2');
+                f2.insertAdjacentHTML('afterend', html3);
+                f3Created = true; // Set the flag to true
+            }
+            
+            var f3 = document.querySelector('.form3');
+            var f2 = document.querySelector('.form2');
+            f3.style.left = "0px";
+            f2.style.left = "430px";
+        }
+
+        function back2() {
+            var f2 = document.querySelector('.form2');
+            var f3 = document.querySelector('.form3');
+            f3.style.left = "-430px";
+            f2.style.left = "0px";
+        }
+
+        function next3() {
+            var name1 = document.getElementById('name1').value;
+            var address1 = document.getElementById('address1').value;
+            var linkedin = document.getElementById('linkedin').value;
+            var fiver = document.getElementById('fiver').value;
+            var pnumber = document.getElementById('phoneNumber').value;
+            var emi = document.getElementById('email').value;
+            document.querySelector('.name').innerHTML=name1;
+            document.querySelector('.address1').innerHTML=address1;
+            document.querySelector('.linkedin').innerHTML=linkedin;
+            document.querySelector('.fiver').innerHTML=fiver;
+            document.querySelector('.pnumber').innerHTML=pnumber;
+            document.querySelector('.emi').innerHTML=emi;
+            // var allres=name1+" "+address1+" "+linkedin+" "+fiver+" "+pnumber+" "+emi;
+        }
+    </script>
+</body>
+
+</html>
